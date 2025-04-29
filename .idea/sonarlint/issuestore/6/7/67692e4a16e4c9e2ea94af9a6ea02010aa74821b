@@ -1,0 +1,12 @@
+
+E
+java:S1604"(Make this anonymous inner class a lambda(ÌÎˆ‚8ê±íè2
+G	java:S106"+Replace this use of System.out by a logger.(˜·æµ8ï±íè2
+L	java:S106"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ8ï±íè2
+L	java:S106"+Replace this use of System.out by a logger.(˜ş‡Ôùÿÿÿÿ8ï±íè2
+L	java:S106"+Replace this use of System.out by a logger.(Ô¨ƒÄûÿÿÿÿ8ï±íè2
+L	java:S106&"+Replace this use of System.out by a logger.(Üßï·şÿÿÿÿ8¡îè2
+L	java:S106("+Replace this use of System.out by a logger.(ŞÒ—üÿÿÿÿ8…ßòè2
+L	java:S106+"+Replace this use of System.out by a logger.(ºòø ûÿÿÿÿ8…ßòè2
+_
+java:S1612,"=Replace this lambda with method reference 'Car::showCarInfo'.(Ö’ìºüÿÿÿÿ8¢îè2
