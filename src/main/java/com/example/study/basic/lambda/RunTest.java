@@ -1,4 +1,4 @@
-package com.example.study.study.lambda;
+package com.example.study.basic.lambda;
 
 import java.util.List;
 
@@ -42,5 +42,21 @@ public class RunTest {
         // Approach 7: Use Lambda Expressions Throughout Your Application
         System.out.println("approach 7");
         CarTest.processCars(cars, c -> c.getSpeed() > 50, c -> c.showCarInfo());
+
+        // Approach 8 :
+        CarTest.processElements(
+                cars,
+                c -> c.getSpeed() > 50,
+                c -> c.getSpeed(),
+                speed -> System.out.println("speed = " + speed)
+        );
+
+        // Approach 9: Use Bulk Data Operations That Accept Lambda Expressions
+        // as Parameters
+
+        cars.stream()
+                .filter(c -> c.getSpeed() > 50)
+                .map(p -> p.getSpeed())
+                .forEach(speed -> System.out.println(speed));
     }
 }

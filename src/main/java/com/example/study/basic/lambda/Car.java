@@ -1,4 +1,4 @@
-package com.example.study.study.lambda;
+package com.example.study.basic.lambda;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

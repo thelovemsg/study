@@ -1,4 +1,4 @@
-package com.example.study.study;
+package com.example.study.basic;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;

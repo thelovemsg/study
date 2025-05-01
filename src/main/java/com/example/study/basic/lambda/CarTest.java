@@ -1,4 +1,4 @@
-package com.example.study.study.lambda;
+package com.example.study.basic.lambda;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -62,7 +62,6 @@ public class CarTest {
     }
 
     // Approach 7, second example
-
     public static void processCarsWithFunction(
             List<Car> cars,
             Predicate<Car> tester,
