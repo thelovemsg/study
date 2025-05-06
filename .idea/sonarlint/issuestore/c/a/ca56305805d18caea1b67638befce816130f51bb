@@ -1,0 +1,16 @@
+
+o
+java:S1104"MMake x a static final constant or non-public and provide accessors if needed.(¤äÍ‚şÿÿÿÿ8øøßØè2
+o
+java:S1104
+"MMake x a static final constant or non-public and provide accessors if needed.(øŞè•ùÿÿÿÿ8ùøßØè2
+s
+java:S4276"QRefactor this code to use the more specialised Functional Interface 'IntConsumer'(´™¿ùÿÿÿÿ8şøßØè2
+Q
+java:S1611"/Remove the parentheses around the "y" parameter(´™¿ùÿÿÿÿ8ÿøßØè2
+L	java:S106"+Replace this use of System.out by a logger.(­Äªúÿÿÿÿ8ÿøßØè2
+X	java:S125"<This block of commented-out lines of code should be removed.(Ÿ—¨8ÿøßØè2
+G	java:S106"+Replace this use of System.out by a logger.(·˜Ü¿8€ùßØè2
+G	java:S106"+Replace this use of System.out by a logger.(Íäñ–8€ùßØè2
+L	java:S106"+Replace this use of System.out by a logger.(ì¦œÕşÿÿÿÿ8€ùßØè2
+G	java:S106"+Replace this use of System.out by a logger.(í’‹8¨ìøØè2

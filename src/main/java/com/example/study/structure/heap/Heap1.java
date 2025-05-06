@@ -1,17 +1,15 @@
-package com.example.study.structure;
+package com.example.study.structure.heap;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-public class Heap {
+public class Heap1 {
     List<Integer> heap;
 
     int[] test = {7,4,5,8,4};
     List<Integer> result;
 
-    public Heap() {
+    public Heap1() {
         heap = new ArrayList<>();
         heap.add(0);
     }

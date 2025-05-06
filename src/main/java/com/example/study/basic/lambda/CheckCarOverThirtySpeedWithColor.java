@@ -1,4 +1,4 @@
-package com.example.study.study.lambda;
+package com.example.study.basic.lambda;
 
 public class CheckCarOverThirtySpeedWithColor implements CarTest.CheckCar {
     @Override
