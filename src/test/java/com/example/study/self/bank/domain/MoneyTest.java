@@ -115,5 +115,4 @@ class MoneyTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> Money.createMoney(negativeAmount));
     }
 
-
 }

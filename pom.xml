@@ -52,6 +52,14 @@
             <scope>test</scope>
         </dependency>
 
+
+        <!-- json parsing with gson-->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
+        </dependency>
+
         <!-- Mockito Dependencies -->
         <dependency>
             <groupId>org.mockito</groupId>
