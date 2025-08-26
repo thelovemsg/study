@@ -85,9 +85,35 @@ class MoneyTest {
         Money addingMoney = Money.createMoney(addingAmount);
         Money subtractingMoney = Money.createMoney(subtractingAmount);
 
-        Money addSubtractTest = money.add(addingMoney).subtract(subtractingMoney);
+        Money addedAndSubtractedMoney = money.add(addingMoney).subtract(subtractingMoney);
 
-        Assertions.assertEquals(new BigDecimal(1_999_000), addSubtractTest.getAmount());
+        Assertions.assertEquals(new BigDecimal(1_999_000), addedAndSubtractedMoney.getAmount());
     }
+
+    @Test
+    @DisplayName("Money를 빼는데 음수인 경우 오류 발생")
+    void moneySubtractError() {
+        Money money = Money.createMoney(testAmount);
+        Money subtractingMoney = Money.createMoney(new BigDecimal(1_111_111));
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> money.subtract(subtractingMoney));
+    }
+
+    @Test
+    @DisplayName("Money 생성시 null이면 0원으로 세팅")
+    void moneyNullTest() {
+        Money money = Money.createMoney(null);
+
+        Assertions.assertNotNull(money);
+        Assertions.assertEquals(new BigDecimal(0), money.getAmount());
+    }
+
+    @Test
+    @DisplayName("Money 생성시 음수로 세팅 에러")
+    void moneyMinusSettingTest() {
+        BigDecimal negativeAmount = new BigDecimal(-1_000_000);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> Money.createMoney(negativeAmount));
+    }
+
 
 }
