@@ -18,13 +18,14 @@ public class Money {
         return new Money(amount);
     }
 
-    public Money subtract(BigDecimal amount) {
-        BigDecimal subtractedAmount = this.amount.subtract(amount);
+    public Money subtract(Money subtractingMoney) {
+        BigDecimal subtractedAmount = this.amount.subtract(subtractingMoney.getAmount());
         return Money.createMoney(subtractedAmount);
     }
 
-    public Money add(BigDecimal amount) {
-        BigDecimal addedAmount = this.amount.add(amount);
+    public Money add(Money addingMoney) {
+        BigDecimal addedAmount = this.amount.add(addingMoney.getAmount());
         return Money.createMoney(addedAmount);
     }
+
 }
