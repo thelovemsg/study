@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.Locale;
+import java.util.Objects;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -37,8 +38,12 @@ public class Money {
         return new Money(amount, currency);
     }
 
-    public static Money of(BigDecimal convertedAmount, String currency) {
-        return Money.createMoney(convertedAmount, Currency.getInstance(currency));
+    public static Money of(BigDecimal amount) {
+        return Money.createMoney(amount);
+    }
+
+    public static Money of(BigDecimal amount, String currency) {
+        return Money.createMoney(amount, Currency.getInstance(currency));
     }
 
     public Money subtract(Money subtractingMoney) {
@@ -65,4 +70,17 @@ public class Money {
         return Money.createMoney(multipliedAmount);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) return true;
+
+        Money money = (Money) o;
+        return amount.compareTo(money.amount) == 0 && Objects.equals(currency, money.currency);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(amount.stripTrailingZeros(), currency);
+    }
 }
