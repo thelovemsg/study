@@ -26,6 +26,11 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
         this.gson = new Gson();
     }
 
+    public ExchangeRateServiceImpl(HttpClient httpClient, Gson gson) {
+        this.httpClient = httpClient;
+        this.gson = gson;
+    }
+
     @Override
     public BigDecimal getExchangeRate(Currency from, Currency to) throws IOException, InterruptedException {
 

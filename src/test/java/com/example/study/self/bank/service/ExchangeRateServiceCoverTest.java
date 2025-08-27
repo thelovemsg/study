@@ -13,8 +13,6 @@ import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.Locale;
 
-import static org.mockito.ArgumentMatchers.any;
-
 class ExchangeRateServiceCoverTest {
 
     private final ExchangeRateService exchangeRateService = new StubExchangeRateServiceImpl();
