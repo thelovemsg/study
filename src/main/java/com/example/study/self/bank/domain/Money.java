@@ -38,6 +38,10 @@ public class Money {
         return new Money(amount, currency);
     }
 
+    public static Money zero() {
+        return new Money(BigDecimal.ZERO);
+    }
+
     public Money subtract(Money subtractingMoney) {
         if(subtractingMoney == null) throw new IllegalArgumentException("subtractingMoney amount is null");
         if(subtractingMoney.getCurrency() != this.getCurrency()) throw new IllegalArgumentException("currency must be same!");

@@ -5,6 +5,7 @@ import com.example.study.self.bank.service.ExchangeRateService;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Currency;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,8 +30,7 @@ public class StubExchangeRateServiceImpl implements ExchangeRateService {
     @Override
     public BigDecimal getExchangeRate(Currency from, Currency to, int precision) throws IOException, InterruptedException {
         String key = from + "_" + to;
-        BigDecimal bigDecimal = fixedRates.get(key);
-        return bigDecimal.setScale(precision, BigDecimal.ROUND_HALF_UP);
+        return fixedRates.get(key).setScale(precision, RoundingMode.HALF_UP);
     }
 
     @Override

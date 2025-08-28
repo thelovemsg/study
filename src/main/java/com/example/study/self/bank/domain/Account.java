@@ -1,11 +1,10 @@
 package com.example.study.self.bank.domain;
 
+import jakarta.interceptor.InterceptorBinding;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.util.AbstractCollection;
-import java.util.Currency;
-import java.util.Map;
+import java.util.*;
 
 /***
     시나리오 1
@@ -37,20 +36,28 @@ public class Account {
 
     private String accountId;
     private String accountNumber;
-    private Money mount;
-    private Money limitPerDay;
-    private Map<Currency, Money> balances;
 
-    public Account createAccount(BigDecimal initialAmount, Currency currency) {
-        return null;
+    @Builder.Default
+    private Money limitPerDay = Money.of(BigDecimal.ZERO);
+
+    @Builder.Default
+    private boolean isDormant =  false;
+
+    @Builder.Default
+    private Map<Currency, Money> balances = new HashMap<>(Map.of(Currency.getInstance(Locale.KOREA), Money.zero()));
+
+    public void deposit(Money money, Currency currency) {
+
     }
 
-    public Account of(BigDecimal initialAmount) {
-        return null;
+    public void withdraw(Money money, Currency currency) {
+
     }
 
-    public Account of(BigDecimal initialAmount, Currency currency) {
-        return null;
+    public void settingDormantFlag(boolean isDormant) {
+        this.isDormant = isDormant;
     }
+
+
 
 }

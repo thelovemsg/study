@@ -7,12 +7,15 @@ import org.junit.jupiter.api.Test;
 class AccountTest {
 
     @Test
-    @DisplayName("계좌 생성 테스트")
+    @DisplayName("계좌 생성 테스트 - id 와 계좌번호 가 올바르게 나오는지 확인")
     void createAccount() {
-//        Account newAccount = Account.createAccount();
-//
-//        Assertions.assertNotNull(newAccount.getAccountId());
-//        Assertions.assertNotNull(newAccount.getAccountNumber());
+        String accountId = "test1234";
+        String accountNumber = "1234567890123456";
+
+        Account newAccount = Account.builder().accountId(accountId).accountNumber(accountNumber).build();
+
+        Assertions.assertEquals(newAccount.getAccountId(), accountId);
+        Assertions.assertEquals(newAccount.getAccountNumber(), accountNumber);
     }
 
     @Test
@@ -37,8 +40,14 @@ class AccountTest {
     }
 
     @Test
-    @DisplayName("원화와 달러로 금액 보유시 합산 표출 : 달러 + 원화 = 총 금액")
+    @DisplayName("특정 환율로 합산시 올바른지 : 달러 + 원화 = 총 금액")
     void wonAndDollarSum() {
+
+    }
+
+    @Test
+    @DisplayName("달러 계산후 값이 올바른지 확인")
+    void onlyDollarSum() {
 
     }
 }
