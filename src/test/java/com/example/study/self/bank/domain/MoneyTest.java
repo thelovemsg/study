@@ -6,6 +6,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.Currency;
+import java.util.Locale;
 
 /***
  *
@@ -48,7 +50,7 @@ class MoneyTest {
     @Test
     @DisplayName("Money 객체 생성 테스트")
     void moneyCreateTest() {
-        Money money = Money.createMoney(testAmount);
+        Money money = Money.of(testAmount);
         BigDecimal creatingAmount = new BigDecimal(1_000_000);
 
         Assertions.assertEquals(creatingAmount, money.getAmount());
@@ -57,8 +59,8 @@ class MoneyTest {
     @Test
     @DisplayName("Money 사용 테스트(마이너스)")
     void moneySubtractTest() {
-        Money money = Money.createMoney(testAmount);
-        Money subtractingMoney = Money.createMoney(new BigDecimal(1_000_000));
+        Money money = Money.of(testAmount);
+        Money subtractingMoney = Money.of(new BigDecimal(1_000_000));
         Money subtractedMoney = money.subtract(subtractingMoney);
 
         Assertions.assertEquals(new BigDecimal(0), subtractedMoney.getAmount());
@@ -68,8 +70,8 @@ class MoneyTest {
     @DisplayName("Money 추가 테스트(플러스)")
     void moneyAddTest() {
         BigDecimal addingAmount = new BigDecimal(1_000_000);
-        Money money = Money.createMoney(testAmount);
-        Money addingMoney = Money.createMoney(addingAmount);
+        Money money = Money.of(testAmount);
+        Money addingMoney = Money.of(addingAmount);
         Money addedMoney = money.add(addingMoney);
 
         Assertions.assertEquals(new BigDecimal(2_000_000), addedMoney.getAmount());
@@ -81,9 +83,9 @@ class MoneyTest {
         BigDecimal addingAmount = new BigDecimal(1_000_000);
         BigDecimal subtractingAmount = new BigDecimal(1_000);
 
-        Money money = Money.createMoney(testAmount);
-        Money addingMoney = Money.createMoney(addingAmount);
-        Money subtractingMoney = Money.createMoney(subtractingAmount);
+        Money money = Money.of(testAmount);
+        Money addingMoney = Money.of(addingAmount);
+        Money subtractingMoney = Money.of(subtractingAmount);
 
         Money addedAndSubtractedMoney = money.add(addingMoney).subtract(subtractingMoney);
 
@@ -93,8 +95,8 @@ class MoneyTest {
     @Test
     @DisplayName("Money를 빼는데 음수인 경우 오류 발생")
     void moneySubtractError() {
-        Money money = Money.createMoney(testAmount);
-        Money subtractingMoney = Money.createMoney(new BigDecimal(1_111_111));
+        Money money = Money.of(testAmount);
+        Money subtractingMoney = Money.of(new BigDecimal(1_111_111));
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> money.subtract(subtractingMoney));
     }
@@ -102,7 +104,7 @@ class MoneyTest {
     @Test
     @DisplayName("Money 생성시 null이면 0원으로 세팅")
     void moneyNullTest() {
-        Money money = Money.createMoney(null);
+        Money money = Money.of(null);
 
         Assertions.assertNotNull(money);
         Assertions.assertEquals(new BigDecimal(0), money.getAmount());
@@ -112,7 +114,18 @@ class MoneyTest {
     @DisplayName("Money 생성시 음수로 세팅 에러")
     void moneyMinusSettingTest() {
         BigDecimal negativeAmount = new BigDecimal(-1_000_000);
-        Assertions.assertThrows(IllegalArgumentException.class, () -> Money.createMoney(negativeAmount));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> Money.of(negativeAmount));
+    }
+
+    @Test
+    @DisplayName("서로 다른 통화인 경우 계산 불가")
+    void calculateDifferentCurrencyMoney() {
+        Money won = Money.of(BigDecimal.ZERO);
+        Money dollars = Money.of(BigDecimal.ZERO, Currency.getInstance(Locale.US));
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> won.add(dollars));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> won.subtract(dollars));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> won.multiply(dollars));
     }
 
 }

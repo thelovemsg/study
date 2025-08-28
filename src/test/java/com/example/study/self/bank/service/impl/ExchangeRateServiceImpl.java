@@ -70,7 +70,7 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
         int scale = target.getDefaultFractionDigits();
         convertedAmount = convertedAmount.setScale(scale, RoundingMode.HALF_UP);
 
-        return Money.of(convertedAmount, to.getCurrencyCode());
+        return Money.of(convertedAmount, to);
     }
 
 }

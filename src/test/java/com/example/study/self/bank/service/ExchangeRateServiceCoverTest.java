@@ -41,7 +41,7 @@ class ExchangeRateServiceCoverTest {
     @DisplayName("변환 메소드 호출시 결과가 올바른지")
     void convertTest() throws IOException, InterruptedException {
         Money money = Money.of(new BigDecimal("1000.00"));
-        Money expectedMoney = money.multiply(new BigDecimal("1300.00"));
+        Money expectedMoney = money.multiply(Money.of(new BigDecimal("1300.00")));
         Money convertedAmount = exchangeRateService.convert(money, Currency.getInstance(Locale.US), Currency.getInstance(Locale.KOREA));
 
         Assertions.assertEquals(expectedMoney, convertedAmount);
