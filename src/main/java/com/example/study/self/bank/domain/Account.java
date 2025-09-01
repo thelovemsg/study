@@ -29,35 +29,92 @@ import java.util.*;
 * */
 
 @Builder
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-@AllArgsConstructor
 @Getter
 public class Account {
 
-    private String accountId;
-    private String accountNumber;
+    private static final Currency KRW = Currency.getInstance("KRW");
+
+    private final String accountId;
+    private final String accountNumber;
 
     @Builder.Default
-    private Money limitPerDay = Money.of(BigDecimal.ZERO);
+    private final Money limitPerDay = Money.of(BigDecimal.ZERO);
 
     @Builder.Default
-    private boolean isDormant =  false;
+    private final boolean dormant = false;
 
-    @Builder.Default
-    private Map<Currency, Money> balances = new HashMap<>(Map.of(Currency.getInstance(Locale.KOREA), Money.zero()));
+    private Map<Currency, Money> balances;
 
-    public void deposit(Money money, Currency currency) {
+    private Account(String accountId,
+                    String accountNumber,
+                    Money limitPerDay,
+                    boolean dormant,
+                    Map<Currency, Money> balances) {
 
+        this.accountId = Objects.requireNonNull(accountId, "accountId");
+        this.accountNumber = Objects.requireNonNull(accountNumber, "accountNumber");
+        this.limitPerDay = limitPerDay == null ? Money.of(BigDecimal.ZERO) : limitPerDay;
+        this.dormant = dormant;
+        // 내부 저장은 항상 불변 Map
+        this.balances = Map.copyOf(
+                balances == null ? defaultBalances() : balances
+        );
     }
 
-    public void withdraw(Money money, Currency currency) {
-
+    public static Account create(String accountId, String accountNumber) {
+        return new Account(accountId, accountNumber, Money.of(BigDecimal.ZERO), false, defaultBalances());
     }
 
-    public void settingDormantFlag(boolean isDormant) {
-        this.isDormant = isDormant;
+    private static Map<Currency, Money> defaultBalances() {
+        Map<Currency, Money> init = new HashMap<>();
+        init.put(KRW, Money.zero()); // 초기 KRW 0원
+        return init;
     }
 
+    /* ---------- 행동(항상 새 인스턴스 반환) ---------- */
 
+    /** 국내 전용: 금액만 → KRW 입금 */
+    public Account deposit(Money money) {
+        return deposit(money, KRW);
+    }
+
+    /** 통화 지정 입금 */
+    public Account deposit(Money money, Currency currency) {
+        requireNotDormant();
+
+        Map<Currency, Money> next = new HashMap<>(this.balances); // ① 복사
+        next.merge(currency, money, Money::add);
+        return new Account(accountId, accountNumber, limitPerDay, dormant, next); // ② 새 인스턴스
+    }
+
+    public Account withdraw(Money money) {
+        return withdraw(money, KRW);
+    }
+
+    public Account withdraw(Money money, Currency currency) {
+        requireNotDormant();
+
+        Money current = balances.get(currency);
+        if (current == null) {
+            throw new IllegalArgumentException("해당 통화의 잔액이 없습니다: " + currency);
+        }
+        Map<Currency, Money> next = new HashMap<>(this.balances);
+        next.put(currency, current.subtract(money));
+        return new Account(accountId, accountNumber, limitPerDay, dormant, next);
+    }
+
+    public Account withDormant(boolean dormant) {
+        if (this.dormant == dormant) return this; // no-op 최적화
+        return new Account(accountId, accountNumber, limitPerDay, dormant, balances);
+    }
+
+    public Account withLimitPerDay(Money newLimit) {
+        if (Objects.equals(this.limitPerDay, newLimit)) return this; // no-op 최적화
+        return new Account(accountId, accountNumber, newLimit, dormant, balances);
+    }
+
+    private void requireNotDormant() {
+        if (dormant) throw new IllegalArgumentException("거래 정지 계좌");
+    }
 
 }
