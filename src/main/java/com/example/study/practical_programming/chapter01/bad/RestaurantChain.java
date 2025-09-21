@@ -1,4 +1,4 @@
-package com.example.study.practicalprogramming.chapter01.bad;
+package com.example.study.practical_programming.chapter01.bad;
 
 import java.util.List;
 
