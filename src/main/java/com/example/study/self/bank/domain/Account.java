@@ -100,6 +100,7 @@ public class Account {
         }
         Map<Currency, Money> next = new HashMap<>(this.balances);
         next.put(currency, current.subtract(money));
+
         return new Account(accountId, accountNumber, limitPerDay, dormant, next);
     }
 
