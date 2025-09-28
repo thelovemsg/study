@@ -11,7 +11,7 @@ public class DiscardServerHandler extends SimpleChannelInboundHandler<Object> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, Object o) throws Exception {
-        Channel
+//        Channel
     }
 
     @Override
