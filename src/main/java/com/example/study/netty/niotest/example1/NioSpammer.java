@@ -1,4 +1,6 @@
-package com.example.study.netty.niotest.example1;// NioSpammer.java
+package com.example.study.netty.niotest.example1;
+
+// NioSpammer.java
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -15,8 +17,9 @@ public class NioSpammer {
         }
         String host = args[0];
         int port = Integer.parseInt(args[1]);
-        int clients = args.length > 2 ? Integer.parseInt(args[2]) : 200;
-        int messages = args.length > 3 ? Integer.parseInt(args[3]) : 5;
+        System.out.println("port = " + port);
+        int clients = args.length > 2 ? Integer.parseInt(args[2]) : 10000;
+        int messages = args.length > 3 ? Integer.parseInt(args[3]) : 10;
         int delay = args.length > 4 ? Integer.parseInt(args[4]) : 200;
 
         long t0 = System.currentTimeMillis();

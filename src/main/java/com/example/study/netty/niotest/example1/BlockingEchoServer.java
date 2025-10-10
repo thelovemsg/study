@@ -1,4 +1,6 @@
-package com.example.study.netty.niotest.example1;// BlockingEchoServer.java
+package com.example.study.netty.niotest.example1;
+
+// BlockingEchoServer.java
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -30,7 +32,9 @@ public class BlockingEchoServer {
                         buf.flip();
                         ch.write(buf); // block
                     }
-                } catch (IOException ignored) {}
+                } catch (IOException ignored) {
+                    System.out.println("ignored = " + ignored);
+                }
             });
         }
     }
